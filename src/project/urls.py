@@ -17,11 +17,16 @@ from django.conf.urls import include, url
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-
+from accounts.views import (login_view,logout_view)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^newsletter/', include("newsletter.urls", namespace='newsletter')),
+
+    url(r'^login/', login_view, name='login'),
+    url(r'^logout/', logout_view, name='logout'),
+    # url(r'^', include("newsletter.urls", namespace='newsletter')),
+    url(r'^newsletter/', include("accounts.urls", namespace='accounts')),
     # url(r'^newsletter/$', post_create),
 ]
 

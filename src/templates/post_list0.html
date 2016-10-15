@@ -1,5 +1,4 @@
-  {% extends "index.html" %}
-
+{% extends "index.html" %}
 {% block content %}
 
   {% for obj in object_list  %}
@@ -22,6 +21,19 @@
   </div>
     {% endfor %}
   </div>
-
-
 {% endblock content %}
+
+{% load crispy_forms_tags %}
+
+{% block form_content %}
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <form method='POST' action=''>{% csrf_token %}
+        <div class="form-group">
+            {{ form|crispy }}
+          </div>
+        <input type="submit" class="btn btn-o-white" value="Say Hello">
+      </form>
+    </div>
+  </div>
+{% endblock form_content %}

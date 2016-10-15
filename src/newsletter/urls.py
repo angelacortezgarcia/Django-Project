@@ -13,17 +13,19 @@ from .views import (
     post_update,
     post_delete,
     post_articles,
-
+    # contact,
 )
 # from . import views
 urlpatterns = [
 
     url(r'^$', post_list, name='list'), #eto ung gumagana
     url(r'^articles/$', post_articles, name='articles'),
-    url(r'^create/$', post_create),
+    # url(r'^contact/$', contact, name='contact'),
+    url(r'^create/$', post_create,name='create'),
     # url(r'^detail/(?P<id>\d+)/$', post_detail),
     url(r'^(?P<id>\d+)/$', post_detail, name='detail'),
     url(r'^(?P<id>\d+)/edit/$', post_update, name='update'),
     url(r'^(?P<id>\d+)/delete/$', post_delete),
+
 
 ]
