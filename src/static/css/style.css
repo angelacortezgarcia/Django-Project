@@ -258,7 +258,7 @@ h1, h2, h3, h4, h5, h6{
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=1 );
 }
 #services {
-	background-image: url(../images/traffic.jpg);
+	background-image: url(../images/pentell2.jpg);
 	color: white;
 }
 #parallax {
@@ -342,6 +342,11 @@ h1, h2, h3, h4, h5, h6{
 #services h1, #services h2{
 	color: white;
 }
+/*.service p {
+	font-size: 20px;
+	text-align: justify;
+	color: #efefef;
+}*/
 .service i {
     font-size: 60px;
 }

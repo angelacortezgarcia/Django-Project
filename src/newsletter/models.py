@@ -1,7 +1,9 @@
 from django.db import models
 from django.conf import settings
 from django.core.urlresolvers import reverse
+
 # Create your models here.
+
 
 def upload_location(instance,filename):
     return "%s/%s" %(instance.id,filename)

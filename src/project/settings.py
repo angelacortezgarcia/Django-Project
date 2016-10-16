@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'angelamae.c.garcia@gmail.com'
-EMAIL_HOST_PASSWORD = 'cortezgarcia'
+EMAIL_HOST_PASSWORD = 'cortez121796'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'star_ratings',
     'newsletter',
 ]
 
@@ -135,3 +136,5 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
 
 MEDIA_URL="/media/"
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
+
+STAR_RATINGS_ANONYMOUS = True

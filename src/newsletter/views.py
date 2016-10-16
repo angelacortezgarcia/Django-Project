@@ -48,9 +48,10 @@ def post_list(request): #list items
         subject = "ACOMSS Newsletter"
         from_email = settings.EMAIL_HOST_USER
         to_email = [from_email]
-        contact_message = "%s: %s via %s"%(form_full_name,form_message,form_email)
+        contact_message = "FROM: %s MESSAGE: %s  EMAIL ADDRESS: %s"%(form_full_name,form_message,form_email)
 
         send_mail(subject, contact_message, from_email, to_email, fail_silently=True)
+
     queryset = Post.objects.all().order_by('-timestamp')[0:3]
     context = {
         "object_list": queryset,
@@ -96,7 +97,7 @@ def post_update(request,id=None):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        messages.success(request,"<a href='#'>Saved</a>",extra_tags='html_safe')
+        messages.success(request,"Saved",extra_tags='html_safe')
         return HttpResponseRedirect(instance.get_absolute_url())
     context = {
         "title": instance.title,
@@ -112,7 +113,71 @@ def post_delete(request,id=None):
     instance=get_object_or_404(Post, id=id)
     instance.delete()
     messages.success(request,"successfully deleted")
-    return redirect("newsletter:list")
+    # return redirect("newsletter:list")
+    return redirect("/newsletter/articles")
+
+def order_by_title(request):
+    queryset_list = Post.objects.all().order_by('title')
+    paginator = Paginator(queryset_list, 6) # Show 25 contacts per page
+    page = request.GET.get('page')
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        "object_list": queryset,
+        "title": "List",
+    }
+    return render(request,"articels.html", context)
+
+def old_post(request):
+    queryset_list = Post.objects.all().order_by('timestamp')
+    paginator = Paginator(queryset_list, 6) # Show 25 contacts per page
+    page = request.GET.get('page')
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        "object_list": queryset,
+        "title": "List",
+    }
+    return render(request,"articels.html", context)
+def new_post(request):
+    queryset_list = Post.objects.all().order_by('-timestamp')
+    paginator = Paginator(queryset_list, 6) # Show 25 contacts per page
+    page = request.GET.get('page')
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        "object_list": queryset,
+        "title": "List",
+    }
+    return render(request,"articels.html", context)
+
+def author_post(request):
+    queryset_list = Post.objects.all().order_by('user')
+    paginator = Paginator(queryset_list, 6) # Show 25 contacts per page
+    page = request.GET.get('page')
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        "object_list": queryset,
+        "title": "List",
+    }
+    return render(request,"articels.html", context)
 
 # def contact(request):
 #     form_contact = ContactForm(request.POST or None)

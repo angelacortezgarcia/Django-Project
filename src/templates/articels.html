@@ -5,7 +5,7 @@
 
 {% block content %}
 <form method='GET' class="form-inline"  action=''>
-  <div class="form-group ">
+  <div class="form-group">
     <input type='text' name='q' placeholder="Search" class='form-control' value='{{ request.GET.q }}'/>
     <input type='submit' class="btn btn-primary" value="Search" />
     </div>
@@ -13,13 +13,16 @@
 <br>
 {% for obj in object_list  %}
 <div class="row">
-  <div class="col-sm-6 col-md-4 blog-post">
+  <!--col-sm-6 col-md-4 blog post-->
+  <div class="col-md-6 col-md-6 hero-feature">
       <div class="thumbnail">
       {% if obj.image %}
-        <img src= '{{ obj.image.url }}' class='img-responsive'/>
+        <img src= '{{ obj.image.url }}' class='img-responsive img-article'/>
       {% endif %}
       <div class="caption">
-        <h3><a href='{{obj.get_absolute_url}}'>  {{obj.title}}</a> <small>{{obj.timestamp|timesince}} ago</small></h3>
+        <h3><a href='{{obj.get_absolute_url}}'>  {{obj.title}}</a>
+          <br>
+        <small>{{obj.timestamp|timesince}} ago</small></h3>
         {% if obj.user.get_full_name %}
         <p>Author: {{ obj.user.get_full_name }}</p>
         {% endif %}

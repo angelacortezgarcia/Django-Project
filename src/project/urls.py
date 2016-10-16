@@ -17,7 +17,7 @@ from django.conf.urls import include, url
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from accounts.views import (login_view,logout_view)
+from accounts.views import (login_view,logout_view,register_view)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,8 +25,11 @@ urlpatterns = [
 
     url(r'^login/', login_view, name='login'),
     url(r'^logout/', logout_view, name='logout'),
+    url(r'^addaccount/', register_view, name='register'),
     # url(r'^', include("newsletter.urls", namespace='newsletter')),
     url(r'^newsletter/', include("accounts.urls", namespace='accounts')),
+    # url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
+    url(r'^newsletter/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
     # url(r'^newsletter/$', post_create),
 ]
 
